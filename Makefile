@@ -6,7 +6,7 @@
 #    By: Unknown <Unknown@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/19 16:55:45 by Unknown           #+#    #+#              #
-#    Updated: 2015/02/19 16:58:25 by Unknown          ###   ########.fr        #
+#    Updated: 2015/02/19 23:02:11 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ O_DIR = o
 LIBFT = libft/
 
 FLAGS = -Wall -Wextra -Werror -O2
-LINKS = -I$(H_DIR) -I$(LIBFT) -L$(LIBFT) -lft
+LINKS = -I$(H_DIR) -I$(LIBFT) -L$(LIBFT) -lft -ltermcap
 DEBUG = 0
 
 C_FILES = $(shell find $(C_DIR) -type f -print | grep "\.c")

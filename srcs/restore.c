@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   restore.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/19 22:39:19 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/02/19 22:31:34 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/02/19 22:34:24 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int				main(int argc, char **argv)
+void			restore_term(t_env *env)
 {
-	t_env			env;
-
-	init_env(&env);
-	init_term(&env);
-	parse_argv(&env, argc, argv);
-	restore_term(&env);
-	return (0);
+	if (tcsetattr(0, TCSADRAIN, &(env->save)) < 0)
+		OUT(2), PS(ERROR "Can't restore termios attr."), NL;
 }
