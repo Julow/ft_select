@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/19 23:51:50 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 18:10:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void			init_term(t_env *env)
 	tc.c_cc[VMIN] = 1;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
 		OUT(2), PS(ERROR "Can't set termios attr."), NL, exit(1);
+	TPS("vi");
+	TPS("sc");
 }

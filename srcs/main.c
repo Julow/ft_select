@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 14:26:46 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 18:11:13 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int				main(int argc, char **argv)
 	parse_argv(&env, argc, argv);
 	print_list(&env);
 	listen_input(&env);
-	restore_term(&env);
+	restore(&env);
 	return (0);
 }
