@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/19 23:05:01 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/19 23:51:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void			init_term(t_env *env)
 	if (tcgetattr(0, &tc) < 0)
 		OUT(2), PS(ERROR "Can't get termios attr."), NL, exit(1);
 	ft_memcpy(&(env->save), &tc, sizeof(struct termios));
-	ft_bzero(&tc, sizeof(struct termios));
 	tc.c_lflag &= ~(ECHO | ICANON);
 	tc.c_cc[VMIN] = 1;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
