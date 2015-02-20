@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 22:48:50 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 23:27:12 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			init_screen(t_env *env)
 
 	env->width = tgetnum("co");
 	env->height = tgetnum("li") - 1;
-	i = 0;
+	i = -1;
 	while (++i < env->height)
 		PC('\n');
 	PS(tgoto(tgetstr("cm", NULL), 0, 0)), TPS("cd"), FL;

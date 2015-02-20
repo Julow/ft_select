@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 22:00:01 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 23:22:23 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,16 @@ void			listen_input(t_env *env)
 			move(env, -1);
 		else if (len == 3 && buff[0] == 27 && buff[2] == 66)
 			move(env, 1);
+		else if (len == 3 && buff[0] == 27 && buff[2] == 67)
+			move(env, MIN(env->height, env->list.length));
+		else if (len == 3 && buff[0] == 27 && buff[2] == 68)
+			move(env, -MIN(env->height, env->list.length));
 		else if (len == 1 && buff[0] == 27)
 			return ;
 		else if (len == 1 && buff[0] == 10)
 			select(env);
 		else
-		{
-/*
-			PS("Key ["), PI(len), PS("] ");
-			PI(buff[0]), PC(' '), PI(buff[1]), PC(' '), PI(buff[2]), NL;
-*/
 			continue ;
-		}
 		print_list(env);
 	}
 }

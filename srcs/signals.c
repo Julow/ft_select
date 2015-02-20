@@ -6,13 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 18:34:55 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 23:40:51 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <signal.h>
 #include <stdlib.h>
+#include <termcap.h>
 
 static t_env	*env_save(t_env *env)
 {
@@ -25,7 +26,13 @@ static t_env	*env_save(t_env *env)
 
 static void		sig_handler(int sig)
 {
-	(void)sig;
+	if (sig == SIGWINCH)
+	{
+		TCLEAR(), FL;
+		init_screen(env_save(NULL));
+		print_list(env_save(NULL));
+		return ;
+	}
 	restore(env_save(NULL));
 	exit(0);
 }
