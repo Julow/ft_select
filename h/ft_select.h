@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 00:36:22 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 13:23:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void			restore_term(t_env *env);
 ** argv.c
 */
 void			parse_argv(t_env *env, int argc, char **argv);
+
+/*
+** signals.c
+*/
+void			listen_signals(t_env *env);
 
 /*
 ** input.c

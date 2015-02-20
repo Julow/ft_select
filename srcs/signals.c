@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 14:26:46 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/02/20 13:31:21 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include <signal.h>
 
-int				main(int argc, char **argv)
+static t_env	*env_save(t_env *env)
 {
-	t_env			env;
+	static t_env	*save;
 
-	init_env(&env);
-	init_term(&env);
-	listen_signals(&env);
-	parse_argv(&env, argc, argv);
-	print_list(&env);
-	listen_input(&env);
-	restore_term(&env);
-	return (0);
+	if (env != NULL)
+		save = env;
+	return (save);
+}
+
+static void		sig_handler(int sig)
+{
+	(void)sig;
+	restore(env_save(NULL));
+}
+
+void			listen_signals(t_env *env)
+{
+	int				i;
+
+	env_save(env);
+	i = -1;
+	while (++i < 32)
+		signal(i, &sig_handler);
 }
