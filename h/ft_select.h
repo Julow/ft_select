@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 18:47:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 23:13:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ typedef struct	s_env
 	struct termios	save;
 	t_tab			list;
 	int				pos;
+	int				cell_width;
+	int				width;
+	int				height;
 }				t_env;
 
 typedef struct	s_choice
 {
 	char			*data;
+	int				length;
 	t_bool			selected;
 }				t_choice;
 
@@ -36,11 +40,14 @@ typedef struct	s_choice
 
 # define ERROR			"ft_select: Error: "
 
+# define CELL_MIN		8
+# define CELL_MARGIN	2
+
 /*
 ** init.c
 */
-void			init_env(t_env *env);
 void			init_term(t_env *env);
+void			init_screen(t_env *env);
 
 /*
 ** restore.c

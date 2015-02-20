@@ -6,19 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 18:54:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 22:48:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
 #include <termcap.h>
-
-void			init_env(t_env *env)
-{
-	ft_tabini(&(env->list), sizeof(t_choice));
-	env->pos = 0;
-}
 
 void			init_term(t_env *env)
 {
@@ -32,9 +26,22 @@ void			init_term(t_env *env)
 	if (tcgetattr(0, &tc) < 0)
 		OUT(2), PS(ERROR "Can't get termios attr."), NL, exit(1);
 	ft_memcpy(&(env->save), &tc, sizeof(struct termios));
-	tc.c_lflag &= ~(ECHO | ICANON);
+	tc.c_lflag &= ~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
 	tc.c_cc[VMIN] = 1;
+	tc.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
 		OUT(2), PS(ERROR "Can't set termios attr."), NL, exit(1);
+}
+
+void			init_screen(t_env *env)
+{
+	int				i;
+
+	env->width = tgetnum("co");
+	env->height = tgetnum("li") - 1;
+	i = 0;
+	while (++i < env->height)
+		PC('\n');
+	PS(tgoto(tgetstr("cm", NULL), 0, 0)), TPS("cd"), FL;
 	TPS("vi"), TPS("sc");
 }
