@@ -6,12 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 13:31:21 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/20 18:34:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <signal.h>
+#include <stdlib.h>
 
 static t_env	*env_save(t_env *env)
 {
@@ -26,6 +27,7 @@ static void		sig_handler(int sig)
 {
 	(void)sig;
 	restore(env_save(NULL));
+	exit(0);
 }
 
 void			listen_signals(t_env *env)
