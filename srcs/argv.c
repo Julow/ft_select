@@ -6,13 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 20:23:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 22:16:46 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 16:37:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void			parse_argv(t_env *env, int argc, char **argv)
+t_bool			parse_argv(t_env *env, int argc, char **argv)
 {
 	int				i;
 	t_choice		*tmp;
@@ -29,4 +29,5 @@ void			parse_argv(t_env *env, int argc, char **argv)
 		if (len > env->cell_width)
 			env->cell_width = len;
 	}
+	return ((env->list.length == 0) ? false : true);
 }
