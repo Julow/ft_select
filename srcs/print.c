@@ -6,35 +6,12 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 23:15:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:48:22 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <termcap.h>
-
-void			print_selected(t_env *env)
-{
-	t_bool			printed;
-	int				i;
-	t_choice		tmp;
-
-	printed = false;
-	i = -1;
-	while (++i < env->list.length)
-	{
-		tmp = TG(t_choice, &(env->list), i);
-		if (tmp.selected)
-		{
-			if (printed)
-				PC(' ');
-			printed = true;
-			PS(tmp.data);
-		}
-	}
-	if (printed)
-		NL;
-}
 
 static void		print_choice(t_env *env, int i)
 {

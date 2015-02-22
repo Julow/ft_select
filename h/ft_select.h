@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:32:43 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:48:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void			listen_input(t_env *env);
 /*
 ** print.c
 */
-void			print_selected(t_env *env);
 void			print_list(t_env *env);
 
 #endif

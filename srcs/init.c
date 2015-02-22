@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:29:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:48:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void			init_term(t_env *env)
 	struct termios	tc;
 
 	if ((term = getenv("TERM")) == NULL)
-		OUT(2), PS(ERROR "Can't get the $TERM variable."), NL, exit(1);
+		PS(ERROR "Can't get the $TERM variable."), NL, exit(1);
 	if (tgetent(NULL, term) <= 0)
-		OUT(2), PS(ERROR "Incompatible terminal: "), PS(term), NL, exit(1);
+		PS(ERROR "Incompatible terminal: "), PS(term), NL, exit(1);
 	if (tcgetattr(0, &tc) < 0)
-		OUT(2), PS(ERROR "Can't get termios attr."), NL, exit(1);
+		PS(ERROR "Can't get termios attr."), NL, exit(1);
 	ft_memcpy(&(env->save), &tc, sizeof(struct termios));
 	tc.c_lflag &= ~(ECHO | ECHOE | ECHOK | ECHONL | ICANON);
 	tc.c_cc[VMIN] = 1;
 	tc.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
-		OUT(2), PS(ERROR "Can't set termios attr."), NL, exit(1);
+		PS(ERROR "Can't set termios attr."), NL, exit(1);
 }
 
 void			init_screen(t_env *env)
