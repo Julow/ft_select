@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 20:23:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 16:37:38 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 19:00:37 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_bool			parse_argv(t_env *env, int argc, char **argv)
 		if (len > env->cell_width)
 			env->cell_width = len;
 	}
+	env->cell_width += CELL_MARGIN * 2;
 	return ((env->list.length == 0) ? false : true);
 }

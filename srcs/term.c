@@ -6,12 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:55:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 19:09:09 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
+#include <sys/ioctl.h>
 #include <termcap.h>
 
 void			init_term(t_env *env)
@@ -31,19 +32,22 @@ void			init_term(t_env *env)
 	tc.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
 		PS(ERROR "Can't set termios attr."), NL, exit(1);
+	TPS("ti"), TPS("vi");
 	update_term(env);
 }
 
 void			update_term(t_env *env)
 {
-	env->width = tgetnum("co");
-	env->height = tgetnum("li") - 1;
-	TPS("ti"), TPS("vi"), TPS("sc");
+	struct winsize	win;
+
+	ioctl(2, TIOCGWINSZ, &win);
+	env->width = win.ws_col;
+	env->height = win.ws_row - 1;
 }
 
 void			restore_term(t_env *env)
 {
-	TCLEAR(), TPS("te"), TPS("ve"), FL;
+	TPS("cl"), TPS("te"), TPS("ve"), FL;
 	if (tcsetattr(0, TCSADRAIN, &(env->save)) < 0)
 		PS(ERROR "Can't restore termios attr."), NL;
 }

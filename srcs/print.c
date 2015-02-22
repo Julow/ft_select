@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:48:22 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 19:57:52 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,40 @@ static void		print_choice(t_env *env, int i)
 		TPS("me");
 }
 
+static t_pt		table_size(t_env *env)
+{
+	t_pt			size;
+
+	size = PT(0, MIN(env->height, env->list.length));
+	if (size.y > 0)
+		size.x = ft_min(env->width / env->cell_width,
+			env->list.length / size.y + 1);
+	return (size);
+}
+
 void			print_list(t_env *env)
 {
 	t_pt			i;
 	int				tmp;
-	int				cols;
-	int				rows;
+	t_pt			size;
 
-	TCLEAR(), FL;
-	rows = MIN(env->height, env->list.length);
-	cols = ft_min(env->width / env->cell_width, env->list.length / rows + 1);
+	TPS("cl");
+	size = table_size(env);
 	i.y = -1;
-	while (++i.y < rows)
+	tmp = 0;
+	while (++i.y < size.y)
 	{
 		i.x = -1;
-		while (++i.x < cols)
+		while (++i.x < size.x)
 		{
-			tmp = rows * i.x + i.y;
-			if (tmp > env->list.length)
+			tmp = size.y * i.x + i.y;
+			if (tmp >= env->list.length)
 				break ;
 			print_choice(env, tmp);
 		}
 		PC('\n');
 	}
+	if (tmp < env->list.length)
+		PS("WIN TOO SMALL");
 	FL;
 }

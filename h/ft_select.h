@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 17:11:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 19:42:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,45 @@
 
 # include "libft.h"
 # include <termios.h>
+
+/*
+** Signals
+** --
+** Signal	Name		Action			Comment
+** --
+**  1		SIGHUP		Terminate		Hangup or Parent terminated
+**  2		SIGINT		Terminate		^\
+**  3		SIGQUIT		Core			^C
+**  4		SIGILL		Core			Illegal Instruction
+**  5		SIGTRAP		Core			Breakpoint
+**  6		SIGABRT		Core			Abort
+**  7		SIGBUS		Core			Bus error
+**  8		SIGFPE		Core			Floating point exception
+**  9		SIGKILL		! Terminate		Kill
+**  10		SIGUSR1		Terminate		User 1
+**  11		SIGSEGV		Core			Segmentation fault
+**  12		SIGUSR2		Terminate		User 2
+**  13		SIGPIPE		Terminate		Broken pipe
+**  14		SIGALRM		Terminate		Timer
+**  15		SIGTERM		Terminate		Terminate
+**  16		SIGSTKFLT	Terminate		Stack fault
+**  17		SIGCHLD		Ignore			Child terminated
+**  18		SIGCONT		Continue		Continue after a Stop
+**  19		SIGSTOP		! Stop			Stop
+**  20		SIGTSTP		Stop			Stop
+**  21		SIGTTIN		Stop			Terminal input
+**  22		SIGTTOU		Stop			Terminal output
+**  23		SIGURG		Ignore			Urgent
+**  24		SIGXCPU		Core			CPU time limit
+**  25		SIGXFSZ		Core			File size limit
+**  26		SIGVTALRM	Terminate		Virtual alarm
+**  27		SIGPROF		Terminate		Profiling timer
+**  28		SIGWINCH	Ignore			Window resize
+**  29		SIGIO		Terminate		-
+**  30		SIGPWR		Terminate		Power failure
+**  31		SIGSYS		Core			-
+** --
+*/
 
 typedef struct	s_env
 {
@@ -35,7 +74,6 @@ typedef struct	s_choice
 
 # define INPUT_BUFF		4
 
-# define TCLEAR()		TPS("cl")
 # define TPS(s)			PS(tgetstr((s), NULL))
 
 # define ERROR			"ft_select: Error: "
