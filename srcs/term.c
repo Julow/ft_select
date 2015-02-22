@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   term.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:48:02 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:55:10 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,19 @@ void			init_term(t_env *env)
 	tc.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
 		PS(ERROR "Can't set termios attr."), NL, exit(1);
+	update_term(env);
 }
 
-void			init_screen(t_env *env)
+void			update_term(t_env *env)
 {
 	env->width = tgetnum("co");
 	env->height = tgetnum("li") - 1;
 	TPS("ti"), TPS("vi"), TPS("sc");
+}
+
+void			restore_term(t_env *env)
+{
+	TCLEAR(), TPS("te"), TPS("ve"), FL;
+	if (tcsetattr(0, TCSADRAIN, &(env->save)) < 0)
+		PS(ERROR "Can't restore termios attr."), NL;
 }

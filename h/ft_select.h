@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 15:48:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:53:32 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,11 @@ typedef struct	s_choice
 # define CELL_MARGIN	2
 
 /*
-** init.c
+** term.c
 */
 void			init_term(t_env *env);
-void			init_screen(t_env *env);
-
-/*
-** restore.c
-*/
-void			restore(t_env *env);
+void			update_term(t_env *env);
+void			restore_term(t_env *env);
 
 /*
 ** argv.c

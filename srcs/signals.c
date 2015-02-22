@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/20 23:40:51 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/22 15:55:45 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void		sig_handler(int sig)
 	if (sig == SIGWINCH)
 	{
 		TCLEAR(), FL;
-		init_screen(env_save(NULL));
+		update_term(env_save(NULL));
 		print_list(env_save(NULL));
 		return ;
 	}
-	restore(env_save(NULL));
+	restore_term(env_save(NULL));
 	exit(0);
 }
 
