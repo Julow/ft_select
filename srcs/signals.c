@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 00:56:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 22:36:20 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <termcap.h>
+
+#define ENV		(env_save(NULL))
 
 static t_env	*env_save(t_env *env)
 {
@@ -24,18 +26,30 @@ static t_env	*env_save(t_env *env)
 	return (save);
 }
 
-static void		sigwinch_handler(int sig)
-{
-	update_term(env_save(NULL));
-	print_list(env_save(NULL));
-	(void)sig;
-}
-
 static void		sig_handler(int sig)
 {
-	restore_term(env_save(NULL));
-	exit(0);
-	(void)sig;
+	if (sig == SIGWINCH)
+	{
+		update_term(ENV);
+		print_list(ENV);
+	}
+	else if (sig == SIGTSTP)
+	{
+		restore_term(ENV);
+		signal(SIGTSTP, SIG_DFL);
+		raise(SIGTSTP);
+	}
+	else if (sig == SIGCONT)
+	{
+		listen_signals(ENV);
+		init_term(ENV);
+		print_list(ENV);
+	}
+	else if (sig != SIGCHLD && sig != SIGURG && sig != SIGIO)
+	{
+		restore_term(ENV);
+		exit(0);
+	}
 }
 
 void			listen_signals(t_env *env)
@@ -45,10 +59,5 @@ void			listen_signals(t_env *env)
 	env_save(env);
 	i = -1;
 	while (++i < 32)
-	{
-		if (i != SIGCHLD && i != SIGURG && i != SIGWINCH && i != SIGIO
-			&& i != SIGCONT && i != SIGKILL && i != SIGSTOP)
-			signal(i, &sig_handler);
-	}
-	signal(SIGWINCH, &sigwinch_handler);
+		signal(i, &sig_handler);
 }
