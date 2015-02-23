@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 22:36:20 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 23:40:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <termcap.h>
+#include <sys/ioctl.h>
 
 #define ENV		(env_save(NULL))
 
@@ -37,7 +38,7 @@ static void		sig_handler(int sig)
 	{
 		restore_term(ENV);
 		signal(SIGTSTP, SIG_DFL);
-		raise(SIGTSTP);
+		ioctl(0, TIOCSTI, "\032");
 	}
 	else if (sig == SIGCONT)
 	{
