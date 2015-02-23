@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 19:02:07 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 19:28:41 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static void		list_select(t_env *env)
 	list_move(env, 66);
 }
 
-static void		list_remove(t_env *env)
+static void		list_remove(t_env *env, t_bool back)
 {
 	ft_tabrem(&(env->list), env->pos, 1);
 	if (env->list.length == 0)
 		restore_term(env), exit(1);
-	else if (env->pos >= env->list.length)
-		env->pos = env->list.length - 1;
+	else if (env->pos >= env->list.length || (back && env->pos > 0))
+		env->pos--;
 }
 
 void			listen_input(t_env *env)
@@ -64,9 +64,10 @@ void			listen_input(t_env *env)
 			list_select(env);
 		else if (len == 1 && buff[0] == 10)
 			return ;
-		else if ((len == 1 && buff[0] == 127)
-			|| (len == 4 && buff[2] == 51 && buff[3] == 126))
-			list_remove(env);
+		else if ((len == 1 && buff[0] == 127) || (len == 1 && buff[0] == 8))
+			list_remove(env, true);
+		else if (len == 4 && buff[2] == 51 && buff[3] == 126)
+			list_remove(env, false);
 		else
 			continue ;
 		print_list(env);

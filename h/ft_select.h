@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 19:42:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 18:57:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 typedef struct	s_env
 {
 	struct termios	save;
+	t_bool			save_am;
 	t_tab			list;
 	int				pos;
 	int				cell_width;

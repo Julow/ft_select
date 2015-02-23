@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 19:57:52 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 18:55:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_pt		table_size(t_env *env)
 	size = PT(0, MIN(env->height, env->list.length));
 	if (size.y > 0)
 		size.x = ft_min(env->width / env->cell_width,
-			env->list.length / size.y + 1);
+			env->list.length / size.y + 1) + 1;
 	return (size);
 }
 
@@ -65,6 +65,6 @@ void			print_list(t_env *env)
 		PC('\n');
 	}
 	if (tmp < env->list.length)
-		PS("WIN TOO SMALL");
+		PS("!WIN TOO SMALL!");
 	FL;
 }

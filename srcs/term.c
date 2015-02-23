@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/22 19:09:09 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 18:58:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void			init_term(t_env *env)
 	tc.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &tc) < 0)
 		PS(ERROR "Can't set termios attr."), NL, exit(1);
-	TPS("ti"), TPS("vi");
+	env->save_am = (tgetflag("am")) ? true : false;
+	TPS("ti"), TPS("vi"), TPS("RA");
 	update_term(env);
 }
 
@@ -47,6 +48,8 @@ void			update_term(t_env *env)
 
 void			restore_term(t_env *env)
 {
+	if (env->save_am)
+		TPS("SA");
 	TPS("cl"), TPS("te"), TPS("ve"), FL;
 	if (tcsetattr(0, TCSADRAIN, &(env->save)) < 0)
 		PS(ERROR "Can't restore termios attr."), NL;
