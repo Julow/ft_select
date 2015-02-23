@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 18:58:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 23:31:59 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void			init_term(t_env *env)
 	struct termios	tc;
 
 	if ((term = getenv("TERM")) == NULL)
-		PS(ERROR "Can't get the $TERM variable."), NL, exit(1);
-	if (tgetent(NULL, term) <= 0)
+		term = "";
+	if (tgetent(NULL, term) <= 0 && tgetent(NULL, DEFAULT_TERM) <= 0)
 		PS(ERROR "Incompatible terminal: "), PS(term), NL, exit(1);
 	if (tcgetattr(0, &tc) < 0)
 		PS(ERROR "Can't get termios attr."), NL, exit(1);

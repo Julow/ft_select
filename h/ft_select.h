@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 22:35:40 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/23 23:32:17 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_choice
 
 # define INPUT_BUFF		4
 
+# define DEFAULT_TERM	"xterm"
+
 # define TPS(s)			PS(tgetstr((s), NULL))
 
 # define ERROR			"ft_select: Error: "
@@ -49,11 +51,6 @@ typedef struct	s_choice
 void			init_term(t_env *env);
 void			update_term(t_env *env);
 void			restore_term(t_env *env);
-
-/*
-** argv.c
-*/
-t_bool			parse_argv(t_env *env, int argc, char **argv);
 
 /*
 ** signals.c
