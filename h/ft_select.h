@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 23:32:17 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 01:09:44 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "libft.h"
 # include <termios.h>
+
+/*
+** TODO:
+** -1 (one choice possible)
+*/
 
 typedef struct	s_env
 {

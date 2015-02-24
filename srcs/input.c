@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 19:28:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 01:27:34 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static void		list_select(t_env *env)
 	list_move(env, 66);
 }
 
+static void		list_select_all(t_env *env, t_bool select)
+{
+	int				i;
+
+	i = -1;
+	while (++i < env->list.length)
+		(&TG(t_choice, &(env->list), i))->selected = select;
+}
+
 static void		list_remove(t_env *env, t_bool back)
 {
 	ft_tabrem(&(env->list), env->pos, 1);
@@ -68,9 +77,12 @@ void			listen_input(t_env *env)
 			list_remove(env, true);
 		else if (len == 4 && buff[2] == 51 && buff[3] == 126)
 			list_remove(env, false);
+		else if (len == 1 && buff[0] == 1)
+			list_select_all(env, true);
+		else if (len == 1 && buff[0] == 5)
+			list_select_all(env, false);
 		else
 			continue ;
 		print_list(env);
-		ft_bzero(buff, INPUT_BUFF);
 	}
 }
