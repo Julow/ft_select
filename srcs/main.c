@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 13:58:57 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 14:51:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ static t_bool	parse_argv(t_env *env, int argc, char **argv)
 	i = 0;
 	if (ft_strequ(argv[1], "-1") && (env->flag_1 = true))
 		i++;
+	ft_tabext(&(env->list), argc);
 	while (++i < argc)
 	{
 		tmp = ft_tabadd0(&(env->list));
 		len = ft_strlen(argv[i]);
-		*tmp = (t_choice){ft_strndup(argv[i], len), len, false};
+		*tmp = (t_choice){argv[i], len, false};
 		if (len > env->cell_width)
 			env->cell_width = len;
 	}
