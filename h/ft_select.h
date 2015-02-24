@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 01:09:44 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 01:36:40 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,18 @@ void			listen_input(t_env *env);
 ** print.c
 */
 void			print_list(t_env *env);
+
+/*
+** list.c
+*/
+void			list_move(t_env *env, int key);
+void			list_select(t_env *env);
+void			list_select_all(t_env *env, t_bool select);
+void			list_remove(t_env *env, t_bool back);
+
+/*
+** list_search.c
+*/
+t_bool			list_search(t_env *env, char c);
 
 #endif
