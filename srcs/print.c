@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 18:55:02 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 20:13:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		print_choice(t_env *env, int i)
 {
 	t_choice		*choice;
 
-	choice = &TG(t_choice, &(env->list), i);
+	choice = TG(t_choice, &(env->list), i);
 	if (i == env->pos)
 		TPS("mr");
 	PCN(' ', CELL_MARGIN);

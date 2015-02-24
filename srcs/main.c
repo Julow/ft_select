@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 14:51:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 20:11:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		print_selected(t_env *env)
 {
 	t_bool			printed;
 	int				i;
-	t_choice		tmp;
+	t_choice		*tmp;
 
 	printed = false;
 	OUT(1);
@@ -25,12 +25,12 @@ static void		print_selected(t_env *env)
 	while (++i < env->list.length)
 	{
 		tmp = TG(t_choice, &(env->list), i);
-		if (tmp.selected)
+		if (tmp->selected)
 		{
 			if (printed)
 				PC(' ');
 			printed = true;
-			PS(tmp.data);
+			PS(tmp->data);
 		}
 	}
 	if (printed)

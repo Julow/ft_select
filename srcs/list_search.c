@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:32:44 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 13:59:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 20:12:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int		search_c(t_tab *list, int start, int end, char c)
 {
 	while (start < end)
 	{
-		if ((&TG(t_choice, list, start))->data[0] == c)
+		if (TG(t_choice, list, start)->data[0] == c)
 			return (start);
 		start++;
 	}
