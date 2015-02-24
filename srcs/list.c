@@ -6,12 +6,21 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 01:31:46 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 14:01:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
+
+void			list_setpos(t_env *env, int pos)
+{
+	if (env->flag_1)
+		(&TG(t_choice, &(env->list), env->pos))->selected = false;
+	env->pos = pos;
+	if (env->flag_1)
+		(&TG(t_choice, &(env->list), env->pos))->selected = true;
+}
 
 void			list_move(t_env *env, int key)
 {
@@ -27,13 +36,15 @@ void			list_move(t_env *env, int key)
 		dir = -env->height;
 	else
 		dir = 0;
-	env->pos = (env->pos + dir + env->list.length) % env->list.length;
+	list_setpos(env, (env->pos + dir + env->list.length) % env->list.length);
 }
 
 void			list_select(t_env *env)
 {
 	t_choice		*tmp;
 
+	if (env->flag_1)
+		return ;
 	tmp = &TG(t_choice, &(env->list), env->pos);
 	tmp->selected = (tmp->selected) ? false : true;
 	list_move(env, 66);
@@ -43,6 +54,8 @@ void			list_select_all(t_env *env, t_bool select)
 {
 	int				i;
 
+	if (env->flag_1)
+		return ;
 	i = -1;
 	while (++i < env->list.length)
 		(&TG(t_choice, &(env->list), i))->selected = select;
@@ -54,5 +67,9 @@ void			list_remove(t_env *env, t_bool back)
 	if (env->list.length == 0)
 		restore_term(env), exit(1);
 	else if (env->pos >= env->list.length || (back && env->pos > 0))
-		env->pos--;
+	{
+		list_setpos(env, env->pos - 1);
+		return ;
+	}
+	list_setpos(env, env->pos);
 }

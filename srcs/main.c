@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 23:27:07 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 13:58:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static t_bool	parse_argv(t_env *env, int argc, char **argv)
 	ft_tabini(&(env->list), sizeof(t_choice));
 	env->cell_width = CELL_MIN;
 	i = 0;
+	if (ft_strequ(argv[1], "-1") && (env->flag_1 = true))
+		i++;
 	while (++i < argc)
 	{
 		tmp = ft_tabadd0(&(env->list));
@@ -77,6 +79,7 @@ int				main(int argc, char **argv)
 	listen_signals(&env);
 	if (!init_fd() || !parse_argv(&env, argc, argv))
 		return (1);
+	list_setpos(&env, 0);
 	init_term(&env);
 	print_list(&env);
 	listen_input(&env);

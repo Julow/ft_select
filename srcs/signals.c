@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 23:40:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 14:02:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		sig_handler(int sig)
 	else if (sig != SIGCHLD && sig != SIGURG && sig != SIGIO)
 	{
 		restore_term(ENV);
-		exit(0);
+		exit(1);
 	}
 }
 

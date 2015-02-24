@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 01:36:40 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 14:01:19 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 # include "libft.h"
 # include <termios.h>
 
-/*
-** TODO:
-** -1 (one choice possible)
-*/
-
 typedef struct	s_env
 {
 	struct termios	save;
 	t_bool			save_am;
+	t_bool			flag_1;
 	t_tab			list;
 	int				pos;
 	int				cell_width;
@@ -75,6 +71,7 @@ void			print_list(t_env *env);
 /*
 ** list.c
 */
+void			list_setpos(t_env *env, int pos);
 void			list_move(t_env *env, int key);
 void			list_select(t_env *env);
 void			list_select_all(t_env *env, t_bool select);

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:32:44 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 01:44:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/02/24 13:59:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ t_bool			list_search(t_env *env, char c)
 
 	if ((i = search_c(&(env->list), env->pos + 1, env->list.length, c)) >= 0
 		|| (i = search_c(&(env->list), 0, env->pos + 1, c)) >= 0)
-		return ((env->pos = i), true);
+		return (list_setpos(env, i), true);
 	return (false);
 }
