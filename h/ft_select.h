@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 17:05:02 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:15:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ typedef struct	s_env
 	int				col_offset;
 	int				columns;
 	int				lines;
-	int				width;
-	int				height;
 }				t_env;
 
 typedef struct	s_choice

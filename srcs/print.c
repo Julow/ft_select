@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 16:59:39 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:14:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void			print_list(t_env *env)
 	int				tmp;
 
 	TPS("cl");
-	i.y = -1;
+	i.y = 0;
 	tmp = 0;
-	while (++i.y < env->lines)
+	while (i.y < env->lines)
 	{
 		i.x = -1;
 		while (++i.x < env->columns)
@@ -56,7 +56,8 @@ void			print_list(t_env *env)
 				break ;
 			print_choice(env, tmp);
 		}
-		PC('\n');
+		if (++i.y < env->lines)
+			PC('\n');
 	}
 	FL;
 }

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 16:57:56 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:14:56 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void			list_move(t_env *env, int key)
 		dir = -1;
 	else if (key == 66)
 		dir = 1;
-	else if (key == 67 && (env->list.length - env->pos) > env->height)
-		dir = env->height;
-	else if (key == 68 && env->pos >= env->height)
-		dir = -env->height;
+	else if (key == 67 && (env->list.length - env->pos) > env->lines)
+		dir = env->lines;
+	else if (key == 68 && env->pos >= env->lines)
+		dir = -env->lines;
 	else
 		dir = 0;
 	list_setpos(env, (env->pos + dir + env->list.length) % env->list.length);

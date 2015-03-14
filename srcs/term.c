@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 14:56:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:15:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ void			update_term(t_env *env)
 	struct winsize	win;
 
 	ioctl(2, TIOCGWINSZ, &win);
-	env->width = win.ws_col;
-	env->height = win.ws_row - 1;
-	env->lines = MIN(env->height, env->list.length);
+	env->lines = ft_max(MIN(win.ws_row, env->list.length), 1);
 	env->columns = 1;
 	if (env->lines > 0)
-		env->columns = ft_min(env->width / env->cell_width,
+		env->columns = ft_min(win.ws_col / env->cell_width,
 			env->list.length / env->lines) + 1;
+	list_setpos(env, env->pos);
 }
 
 void			restore_term(t_env *env)
