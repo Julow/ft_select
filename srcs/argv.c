@@ -6,11 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 20:50:42 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 21:10:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 21:58:05 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
+#include "ft_colors.h"
+#include <sys/stat.h>
 
 static int		parse_options(t_env *env, int argc, char **argv)
 {
@@ -28,12 +30,40 @@ static int		parse_options(t_env *env, int argc, char **argv)
 		while (argv[i][++j] != '\0')
 			if (argv[i][j] == '1')
 				flags |= FLAG_1;
+			else if (argv[i][j] == 'c')
+				flags |= FLAG_C;
 			else
 				return ((ft_strequ(argv[i], "--")) ? i + 1 : i);
 		env->flags |= flags;
 	}
 
 	return (i);
+}
+
+static char		*get_color(const char *arg)
+{
+	struct stat		stat;
+
+	if (lstat(arg, &stat) < 0)
+		return (NULL);
+	if (S_ISDIR(stat.st_mode))
+		return (COLOR_DIR);
+	if (S_ISFIFO(stat.st_mode))
+		return (COLOR_PIPE);
+	if (S_ISBLK(stat.st_mode))
+		return (COLOR_BLOCK);
+	if (S_ISLNK(stat.st_mode))
+		return (COLOR_LINK);
+	if (S_ISSOCK(stat.st_mode))
+		return (COLOR_SOCKET);
+	if (stat.st_mode & S_IXUSR)
+		return (COLOR_EXEC);
+	if (!(stat.st_mode & S_IRUSR))
+		return (COLOR_DENIED);
+	if (ft_strend(arg, ".zip") || ft_strend(arg, ".tar")
+		|| ft_strend(arg, ".gz"))
+		return (COLOR_ARCHIVE);
+	return (NULL);
 }
 
 static t_bool	parse_list(t_env *env, int argc, char **argv)
@@ -50,7 +80,10 @@ static t_bool	parse_list(t_env *env, int argc, char **argv)
 	{
 		tmp = ft_tabadd0(&(env->list));
 		len = ft_strlen(argv[i]);
-		*tmp = (t_choice){argv[i], len, false};
+		if (FLAG(env, FLAG_C))
+			*tmp = (t_choice){argv[i], len, false, get_color(argv[i])};
+		else
+			*tmp = (t_choice){argv[i], len, false, NULL};
 		if (len > env->cell_width)
 			env->cell_width = len;
 		i++;

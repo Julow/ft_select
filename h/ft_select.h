@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 21:05:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 21:57:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 ** -
 ** Options:
 **  -1			Only one selection is possible
+**  -c			Enable colors (using the right of the file)
 */
 
 typedef struct	s_env
@@ -50,7 +51,7 @@ typedef struct	s_choice
 	char			*data;
 	int				length;
 	t_bool			selected;
-
+	char			*color;
 }				t_choice;
 
 # define ERROR			"ft_select: Error: "
@@ -60,6 +61,16 @@ typedef struct	s_choice
 
 # define FLAG(e,f)		(((e)->flags) & (f))
 # define FLAG_1			(1 << 1)
+# define FLAG_C			(1 << 2)
+
+# define COLOR_DIR		C_BLUE
+# define COLOR_PIPE		C_YELLOW
+# define COLOR_BLOCK	C_YELLOW
+# define COLOR_LINK		C_CYAN
+# define COLOR_SOCKET	C_MAGENTA
+# define COLOR_EXEC		C_GREEN
+# define COLOR_DENIED	C_GRAY
+# define COLOR_ARCHIVE	C_RED
 
 /*
 ** term.c
@@ -100,5 +111,10 @@ void			list_remove(t_env *env, t_bool back);
 ** list_search.c
 */
 t_bool			list_search(t_env *env, char c);
+
+/*
+** utils
+*/
+t_bool			ft_strend(const char *str, const char *end);
 
 #endif
