@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 18:02:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 20:27:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			list_remove(t_env *env, t_bool back)
 {
 	ft_tabrem(&(env->list), env->pos, 1);
 	if (env->list.length == 0)
-		restore_term(env), exit(1);
+		term_restore(&(env->term)), exit(1);
 	else if (env->pos >= env->list.length || (back && env->pos > 0))
 	{
 		list_setpos(env, env->pos - 1);

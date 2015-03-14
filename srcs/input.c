@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 18:01:52 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 20:29:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_bool	handle_key(t_env *env, int key)
 	if (key == KEY_UP || key == KEY_LEFT || key == KEY_RIGHT || key == KEY_DOWN)
 		list_move(env, key);
 	else if (key == KEY_ESC)
-		restore_term(env), exit(0);
+		term_restore(&(env->term)), exit(0);
 	else if (key == ' ')
 		list_select(env);
 	else if (key == KEY_BACK || key == 8)

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 14:02:30 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 20:28:28 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,25 @@ static void		sig_handler(int sig)
 {
 	if (sig == SIGWINCH)
 	{
-		update_term(ENV);
+		term_update(&(ENV->term));
+		update_env(ENV);
 		print_list(ENV);
 	}
 	else if (sig == SIGTSTP)
 	{
-		restore_term(ENV);
+		term_restore(&(ENV->term));
 		signal(SIGTSTP, SIG_DFL);
 		ioctl(0, TIOCSTI, "\032");
 	}
 	else if (sig == SIGCONT)
 	{
 		listen_signals(ENV);
-		init_term(ENV);
+		init_env(ENV);
 		print_list(ENV);
 	}
 	else if (sig != SIGCHLD && sig != SIGURG && sig != SIGIO)
 	{
-		restore_term(ENV);
+		term_restore(&(ENV->term));
 		exit(1);
 	}
 }

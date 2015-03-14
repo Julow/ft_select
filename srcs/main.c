@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 17:09:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 20:30:28 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,11 @@ int				main(int argc, char **argv)
 
 	ft_bzero(&env, sizeof(t_env));
 	listen_signals(&env);
-	if (!init_fd() || !parse_argv(&env, argc, argv))
+	if (!init_fd() || !parse_argv(&env, argc, argv) || !init_env(&env))
 		return (1);
-	init_term(&env);
 	print_list(&env);
 	listen_input(&env);
-	restore_term(&env);
+	term_restore(&(env.term));
 	print_selected(&env);
 	return (0);
 }
