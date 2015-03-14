@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 20:50:42 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 21:58:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 22:51:01 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int		parse_options(t_env *env, int argc, char **argv)
 				return ((ft_strequ(argv[i], "--")) ? i + 1 : i);
 		env->flags |= flags;
 	}
-
 	return (i);
 }
 
@@ -60,9 +59,11 @@ static char		*get_color(const char *arg)
 		return (COLOR_EXEC);
 	if (!(stat.st_mode & S_IRUSR))
 		return (COLOR_DENIED);
-	if (ft_strend(arg, ".zip") || ft_strend(arg, ".tar")
-		|| ft_strend(arg, ".gz"))
+	if (ft_strend(arg, ".o") || ft_strend(arg, ".a") || ft_strend(arg, ".zip")
+		|| ft_strend(arg, ".tar") || ft_strend(arg, ".gz"))
 		return (COLOR_ARCHIVE);
+	if (ft_strend(arg, ".c") || ft_strend(arg, ".h") || ft_strend(arg, ".s"))
+		return (COLOR_CODE);
 	return (NULL);
 }
 

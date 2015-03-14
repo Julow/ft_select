@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 21:57:06 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 22:11:12 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_choice
 # define COLOR_EXEC		C_GREEN
 # define COLOR_DENIED	C_GRAY
 # define COLOR_ARCHIVE	C_RED
+# define COLOR_CODE		C_LGRAY
 
 /*
 ** term.c
