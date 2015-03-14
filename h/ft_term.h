@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 18:13:22 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 20:27:35 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 20:38:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ void			term_restore(t_term *term);
 
 /*
 ** Keys
+** -
+** Return value of term_getchr()
+** -
+** Ascii chars have their own value as key
 */
+
+# define KEY_ASCII(c)	(c)
 
 # define KEY_ESC		27
 # define KEY_BACK		127

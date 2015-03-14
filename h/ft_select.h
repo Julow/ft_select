@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 20:30:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 21:05:05 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 typedef struct	s_env
 {
 	t_term			term;
-	t_bool			flag_1;
+	int				flags;
 	t_tab			list;
 	int				pos;
 	int				cell_width;
@@ -50,12 +50,16 @@ typedef struct	s_choice
 	char			*data;
 	int				length;
 	t_bool			selected;
+
 }				t_choice;
 
 # define ERROR			"ft_select: Error: "
 
 # define CELL_MIN		8
 # define CELL_MARGIN	2
+
+# define FLAG(e,f)		(((e)->flags) & (f))
+# define FLAG_1			(1 << 1)
 
 /*
 ** term.c
@@ -67,6 +71,11 @@ void			update_env(t_env *env);
 ** signals.c
 */
 void			listen_signals(t_env *env);
+
+/*
+** argv.c
+*/
+t_bool			parse_argv(t_env *env, int argc, char **argv);
 
 /*
 ** input.c
