@@ -6,29 +6,28 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 01:37:50 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 18:01:52 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-#include <unistd.h>
 #include <stdlib.h>
 
-static t_bool	handle_key(t_env *env, char *buff, int len)
+static t_bool	handle_key(t_env *env, int key)
 {
-	if (len == 3 && buff[0] == 27 && buff[2] >= 65 && buff[2] <= 68)
-		list_move(env, buff[2]);
-	else if (len == 1 && buff[0] == 27)
+	if (key == KEY_UP || key == KEY_LEFT || key == KEY_RIGHT || key == KEY_DOWN)
+		list_move(env, key);
+	else if (key == KEY_ESC)
 		restore_term(env), exit(0);
-	else if (len == 1 && buff[0] == ' ')
+	else if (key == ' ')
 		list_select(env);
-	else if ((len == 1 && buff[0] == 127) || (len == 1 && buff[0] == 8))
+	else if (key == KEY_BACK || key == 8)
 		list_remove(env, true);
-	else if (len == 4 && buff[2] == 51 && buff[3] == 126)
+	else if (key == KEY_DELETE)
 		list_remove(env, false);
-	else if (len == 1 && buff[0] == 1)
+	else if (key == KEY_CTRL_A)
 		list_select_all(env, true);
-	else if (len == 1 && buff[0] == 5)
+	else if (key == KEY_CTRL_E)
 		list_select_all(env, false);
 	else
 		return (false);
@@ -37,15 +36,14 @@ static t_bool	handle_key(t_env *env, char *buff, int len)
 
 void			listen_input(t_env *env)
 {
-	char			buff[INPUT_BUFF] = {0};
-	int				len;
+	int				key;
 
-	while ((len = read(0, buff, INPUT_BUFF)) > 0)
+	while ((key = term_getchr()) != EOF)
 	{
-		if (len == 1 && buff[0] == 10)
+		if (key == KEY_RETURN)
 			return ;
-		else if (handle_key(env, buff, len)
-			|| (len == 1 && ft_isprint(buff[0]) && list_search(env, buff[0])))
+		else if (handle_key(env, key)
+			|| (ft_isprint(key) && list_search(env, key)))
 			print_list(env);
 	}
 }

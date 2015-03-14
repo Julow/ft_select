@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 17:15:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 18:00:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 ** Keys:
 **  space		toggle select/deselect
 **  arrows		moves
-**  delete		delete an item
+**  delete		delete an item (delete/backspace/^H)
 **  ^A			select all
 **  ^E			deselect all
 **  RETURN		print the selection and quit
@@ -53,8 +53,6 @@ typedef struct	s_choice
 	t_bool			selected;
 }				t_choice;
 
-# define INPUT_BUFF		4
-
 # define DEFAULT_TERM	"xterm"
 
 # define TPS(s)			PS(tgetstr((s), NULL))
@@ -64,10 +62,24 @@ typedef struct	s_choice
 # define CELL_MIN		8
 # define CELL_MARGIN	2
 
+# define KEY_ESC		27
+# define KEY_BACK		127
+# define KEY_DELETE		2117294875
+# define KEY_RETURN		10
+
+# define KEY_UP			4283163
+# define KEY_LEFT		4479771
+# define KEY_RIGHT		4414235
+# define KEY_DOWN		4348699
+
+# define KEY_CTRL_A		1
+# define KEY_CTRL_E		5
+
 /*
 ** term.c
 */
 void			init_term(t_env *env);
+int				term_getchr(void);
 void			update_term(t_env *env);
 void			restore_term(t_env *env);
 

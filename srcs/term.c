@@ -6,12 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 17:15:50 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:53:18 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/ioctl.h>
 #include <termcap.h>
 
@@ -35,6 +36,16 @@ void			init_term(t_env *env)
 	env->save_am = (tgetflag("am")) ? true : false;
 	TPS("ti"), TPS("vi"), TPS("RA");
 	update_term(env);
+}
+
+int				term_getchr(void)
+{
+	int				chr;
+
+	chr = 0;
+	if (read(0, &chr, sizeof(int)) <= 0)
+		return (EOF);
+	return (chr);
 }
 
 void			update_term(t_env *env)
