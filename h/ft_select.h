@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 14:01:19 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 17:05:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@
 # include "libft.h"
 # include <termios.h>
 
+/*
+** ft_select
+** -
+** Keys:
+**  space		toggle select/deselect
+**  arrows		moves
+**  delete		delete an item
+**  ^A			select all
+**  ^E			deselect all
+**  RETURN		print the selection and quit
+**  ESC			quit (without printing the selection)
+**  All other	Search in the list
+** -
+** Options:
+**  -1			Only one selection is possible
+*/
+
 typedef struct	s_env
 {
 	struct termios	save;
@@ -24,6 +41,9 @@ typedef struct	s_env
 	t_tab			list;
 	int				pos;
 	int				cell_width;
+	int				col_offset;
+	int				columns;
+	int				lines;
 	int				width;
 	int				height;
 }				t_env;

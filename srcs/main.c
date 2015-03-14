@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 20:11:55 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 12:32:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int				main(int argc, char **argv)
 	listen_signals(&env);
 	if (!init_fd() || !parse_argv(&env, argc, argv))
 		return (1);
-	list_setpos(&env, 0);
 	init_term(&env);
+	list_setpos(&env, 0);
 	print_list(&env);
 	listen_input(&env);
 	restore_term(&env);

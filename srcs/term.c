@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 22:31:50 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/23 23:31:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 14:56:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void			update_term(t_env *env)
 	ioctl(2, TIOCGWINSZ, &win);
 	env->width = win.ws_col;
 	env->height = win.ws_row - 1;
+	env->lines = MIN(env->height, env->list.length);
+	env->columns = 1;
+	if (env->lines > 0)
+		env->columns = ft_min(env->width / env->cell_width,
+			env->list.length / env->lines) + 1;
 }
 
 void			restore_term(t_env *env)

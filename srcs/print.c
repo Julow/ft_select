@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/02 19:03:33 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 16:59:39 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static void		print_choice(t_env *env, int i)
 	t_choice		*choice;
 
 	choice = TG(t_choice, &(env->list), i);
-	PCN(' ', CELL_MARGIN);
+	if (i == env->pos)
+		PCN(' ', CELL_MARGIN - 2), PS("> ");
+	else
+		PCN(' ', CELL_MARGIN);
 	if (choice->selected)
 		TPS("mr");
 	if (i == env->pos)
@@ -29,43 +32,31 @@ static void		print_choice(t_env *env, int i)
 	PCN(' ', env->cell_width - choice->length);
 	if (choice->selected)
 		TPS("me");
-	PCN(' ', CELL_MARGIN);
-}
-
-static t_pt		table_size(t_env *env)
-{
-	t_pt			size;
-
-	size = PT(0, MIN(env->height, env->list.length));
-	if (size.y > 0)
-		size.x = ft_min(env->width / env->cell_width,
-			env->list.length / size.y + 1) + 1;
-	return (size);
+	if (i == env->pos)
+		PCN(' ', CELL_MARGIN - 2), PS(" <");
+	else
+		PCN(' ', CELL_MARGIN);
 }
 
 void			print_list(t_env *env)
 {
 	t_pt			i;
 	int				tmp;
-	t_pt			size;
 
 	TPS("cl");
-	size = table_size(env);
 	i.y = -1;
 	tmp = 0;
-	while (++i.y < size.y)
+	while (++i.y < env->lines)
 	{
 		i.x = -1;
-		while (++i.x < size.x)
+		while (++i.x < env->columns)
 		{
-			tmp = size.y * i.x + i.y;
+			tmp = env->lines * (i.x + env->col_offset) + i.y;
 			if (tmp >= env->list.length)
 				break ;
 			print_choice(env, tmp);
 		}
 		PC('\n');
 	}
-	if (tmp < env->list.length)
-		PS("!WIN TOO SMALL!");
 	FL;
 }

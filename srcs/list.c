@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/02/24 20:12:56 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/14 16:57:56 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void			list_setpos(t_env *env, int pos)
 	if (env->flag_1)
 		TG(t_choice, &(env->list), env->pos)->selected = false;
 	env->pos = pos;
+	while ((env->pos / env->lines) > (env->col_offset + env->columns - 2))
+		env->col_offset++;
+	while ((env->pos / env->lines) < env->col_offset)
+		env->col_offset--;
 	if (env->flag_1)
 		TG(t_choice, &(env->list), env->pos)->selected = true;
 }
