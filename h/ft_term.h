@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 18:13:22 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 20:38:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 00:08:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void			term_restore(t_term *term);
 # define KEY_BACK		127
 # define KEY_DELETE		2117294875
 # define KEY_RETURN		10
+# define KEY_END		4607771
 
 # define KEY_UP			4283163
 # define KEY_LEFT		4479771

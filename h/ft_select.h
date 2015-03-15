@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 22:11:12 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 00:32:12 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 **  ^E			deselect all
 **  RETURN		print the selection and quit
 **  ESC			quit (without printing the selection)
+**  END			open menu
 **  All other	Search in the list
 ** -
 ** Options:
@@ -112,6 +113,11 @@ void			list_remove(t_env *env, t_bool back);
 ** list_search.c
 */
 t_bool			list_search(t_env *env, char c);
+
+/*
+** menu
+*/
+void			open_menu(t_env *env);
 
 /*
 ** utils

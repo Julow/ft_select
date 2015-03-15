@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 20:50:42 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 22:51:01 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 00:19:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ static t_bool	parse_list(t_env *env, int argc, char **argv)
 	{
 		tmp = ft_tabadd0(&(env->list));
 		len = ft_strlen(argv[i]);
-		if (FLAG(env, FLAG_C))
-			*tmp = (t_choice){argv[i], len, false, get_color(argv[i])};
-		else
-			*tmp = (t_choice){argv[i], len, false, NULL};
+		*tmp = (t_choice){argv[i], len, false, get_color(argv[i])};
 		if (len > env->cell_width)
 			env->cell_width = len;
 		i++;
