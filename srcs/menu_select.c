@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/15 16:04:59 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:36:36 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 17:06:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,13 @@ static void		select_by_color(t_env *env, const char *color, t_bool select)
 void			menu_select(t_env *env)
 {
 	int				select;
-	char			*menu[10];
+	const char		*menu[] = {"Select All", "Deselect All",
 
-	menu[0] = "Select All";
-	menu[1] = "Deselect All";
-	menu[2] = "Select folders";
-	menu[3] = "Deselect folders";
-	menu[4] = "Select archives";
-	menu[5] = "Deselect archives";
-	menu[6] = "Select code";
-	menu[7] = "Deselect code";
-	menu[8] = "Back";
-	menu[9] = NULL;
-	select = ft_menu(menu);
+	"Select folders", "Deselect folders", "Select archives",
+	"Deselect archives", "Select code", "Deselect code",
+	"Select special", "Deselect special", "Select other", "Deselect other",
+	"Back", NULL};
+	select = ft_menu((char**)menu);
 	if (select == 0 || select == 1)
 		list_select_all(env, (select == 0));
 	else if (select == 2 || select == 3)
@@ -51,4 +45,15 @@ void			menu_select(t_env *env)
 		select_by_color(env, COLOR_ARCHIVE, (select == 4));
 	else if (select == 6 || select == 7)
 		select_by_color(env, COLOR_CODE, (select == 6));
+	else if (select == 8 || select == 9)
+	{
+		select_by_color(env, COLOR_PIPE, (select == 8));
+		select_by_color(env, COLOR_BLOCK, (select == 8));
+		select_by_color(env, COLOR_LINK, (select == 8));
+		select_by_color(env, COLOR_SOCKET, (select == 8));
+		select_by_color(env, COLOR_EXEC, (select == 8));
+		select_by_color(env, COLOR_DENIED, (select == 8));
+	}
+	else if (select == 10 || select == 11)
+		select_by_color(env, NULL, (select == 10));
 }

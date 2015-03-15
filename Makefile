@@ -6,7 +6,7 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/09 12:51:40 by jaguillo          #+#    #+#              #
-#    Updated: 2015/03/15 16:39:13 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/03/15 16:46:57 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,18 @@ H_DIR = h
 C_DIR = srcs
 O_DIR = o
 
+# Libft config
+export FT_CONFIG = -DEMAL_ALL -DFTOUT_BUFF=2048
+
 # GCC flags
 LINKS = -Llibft/ -lft -ltermcap
-HEADS = -I$(H_DIR) -Ilibft/
+HEADS = -I$(H_DIR) -Ilibft/ $(FT_CONFIG)
 
 FLAGS = -Wall -Wextra -Werror -O2
 DEBUG_FLAGS = -Wall -Wextra -g -D DEBUG_MODE
 
 # Dirs containing a Makefile to execute (all, clean and fclean)
 MAKES = libft/
-
-# Libft config
-export FT_CONFIG = -DEMAL_ALL -DFTOUT_BUFF=2048
 
 #
 # Internal
