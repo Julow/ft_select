@@ -6,9 +6,16 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/03 13:05:11 by jaguillo          #+#    #+#              #
-#    Updated: 2015/02/14 10:43:55 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/03/06 18:31:27 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#
+# exportable vars:
+#  DEBUG_MODE	(0)		Enable debug flags
+#  ASM_ENABLE	(1)		Enable/Disable ASM
+#  FT_CONFIG	("")	Extra macros/includes (C only)
+#
 
 NAME = libft.a
 
@@ -16,18 +23,37 @@ H_DIR = .
 C_DIR = srcs
 O_DIR = o
 
-# GCC flags
-ifeq ($(C_FLAGS),)
-	export C_FLAGS = -Wall -Wextra -Werror -O2
+# Debug mode
+ifeq ($(DEBUG_MODE),)
+	export DEBUG_MODE = 0
 endif
+
+# GCC flags
+C_DEBUG_FLAGS = -Wall -Wextra -g -D DEBUG_MODE
+
 LINKS = -I$(H_DIR) $(FT_CONFIG)
+
+ifeq ($(C_FLAGS),)
+ifeq ($(DEBUG_MODE),1)
+	C_FLAGS = $(C_DEBUG_FLAGS)
+else
+	C_FLAGS = -Wall -Wextra -Werror -O2
+endif
+endif
 
 # NASM flags
 ifeq ($(ASM_ENABLE),)
 	export ASM_ENABLE = 1
 endif
+
+ASM_DEBUG_FLAGS = -Wall -g -D DEBUG_MODE
+
 ifeq ($(ASM_FLAGS),)
-	export ASM_FLAGS = -Wall -Werror
+ifeq ($(DEBUG_MODE),1)
+	ASM_FLAGS = $(ASM_DEBUG_FLAGS)
+else
+	ASM_FLAGS = -Wall -Werror
+endif
 endif
 
 ifeq ($(shell uname),Darwin)
@@ -45,7 +71,8 @@ C_DIRS = $(shell find $(C_DIR) -depth -type d -print)
 # Build .o list
 O_DIRS = $(C_DIRS:$(C_DIR)/%=$(O_DIR)/%)
 TMP = $(C_FILES:$(C_DIR)/%.c=$(O_DIR)/%.o)
-O_FILES = $(TMP:$(C_DIR)/%.s=$(O_DIR)/%.o)
+TMP2 = $(TMP:$(C_DIR)/%.s=$(O_DIR)/%.o)
+O_FILES = $(TMP2:$(C_DIR)/%.asm=$(O_DIR)/%.o)
 
 # Create O_DIR and childs
 $(shell mkdir -p $(O_DIRS) $(O_DIR) 2> /dev/null || echo "" > /dev/null)
@@ -64,11 +91,11 @@ $(NAME): $(O_FILES)
 	@ar rcs $@ $^ && printf "\033[0;32m" || printf "\033[0;31m"
 	@printf $(MSG_2) "$@"
 
-# Compile .s sources (only if nasm is installed and support ASM_FORMAT)
+# Compile .asm sources (only if nasm is installed and support ASM_FORMAT)
 ifeq ($(ASM_ENABLE),1)
 ifneq ($(shell nasm -v 2> /dev/null),)
 ifneq ($(shell nasm -hf | grep "$(ASM_FORMAT)"),)
-$(O_DIR)/%.o: $(C_DIR)/%.s
+$(O_DIR)/%.o: $(C_DIR)/%.asm
 	@nasm $(ASM_SPECIAL) $(ASM_FLAGS) -o $@ $< \
 		&& printf $(MSG_0) "$<" "$@" || (printf $(MSG_1) "$<" "$@" && exit 1)
 endif
@@ -77,7 +104,7 @@ endif
 
 # Compile .c sources
 $(O_DIR)/%.o: $(C_DIR)/%.c
-	@gcc $(C_FLAGS) $(LINKS) -o $@ -c $< \
+	@clang $(C_FLAGS) $(LINKS) -o $@ -c $< \
 		&& printf $(MSG_0) "$<" "$@" || (printf $(MSG_1) "$<" "$@" && exit 1)
 
 # Enable debug mode, change flags and build
@@ -109,7 +136,8 @@ _noasm:
 
 # Enable debug mode and change compilation flags
 _debug:
-	$(eval C_FLAGS = -Wall -Wextra -g -D DEBUG_MODE)
-	$(eval ASM_FLAGS = -Wall -g -D DEBUG_MODE)
+	$(eval C_FLAGS = $(C_DEBUG_FLAGS))
+	$(eval ASM_FLAGS = $(ASM_DEBUG_FLAGS))
+	$(eval DEBUG_MODE = 1)
 
 .PHONY: all debug clean fclean re rebug update _noasm _debug
