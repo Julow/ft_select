@@ -1,25 +1,26 @@
 ;; ************************************************************************** ;;
 ;;                                                                            ;;
 ;;                                                        :::      ::::::::   ;;
-;;   ft_isspace.s                                       :+:      :+:    :+:   ;;
+;;   ft_throw.asm                                       :+:      :+:    :+:   ;;
 ;;                                                    +:+ +:+         +:+     ;;
 ;;   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        ;;
 ;;                                                +#+#+#+#+#+   +#+           ;;
-;;   Created: 2015/01/22 16:39:31 by jaguillo          #+#    #+#             ;;
-;;   Updated: 2015/01/31 23:19:02 by jaguillo         ###   ########.fr       ;;
+;;   Created: 2015/03/04 23:27:22 by jaguillo          #+#    #+#             ;;
+;;   Updated: 2015/03/04 23:32:14 by jaguillo         ###   ########.fr       ;;
 ;;                                                                            ;;
 ;; ************************************************************************** ;;
 
-; int			ft_isspace(int c);
-global	ft_isspace
-extern	ft_isrange
+; void			ft_throw(void *t)
+global	ft_throw
 
-ft_isspace:
-	cmp		edi, ' '		; check space
-	jz		.true
-	mov		esi, 9			; check \t, \n, \v, \f, \r
-	mov		edx, 13
-	jmp		ft_isrange
-.true:
-	mov		rax, 1
+ft_throw:
+	mov		rbx, [rdi]			; restore all callee saved registers
+	mov		rbp, [rdi + 8]
+	mov		rsp, [rdi + 16]
+	mov		r12, [rdi + 24]
+	mov		r13, [rdi + 32]
+	mov		r14, [rdi + 40]
+	mov		r15, [rdi + 48]
+	mov		rax, 1				; return 1 (in ft_try)
+	jmp		[rdi + 56]			; jump back
 	ret

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 20:47:21 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/13 15:34:05 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/10 18:24:54 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ inline char		ft_buffget(t_buff *buff)
 	{
 		if (buff->fd < 0)
 			return ('\0');
-		if ((buff->length = read(buff->fd, buff->data, BUFF_SIZE)) <= 0)
-			return (free(buff->data), (*buff = BUFF(NULL, 0, 0)), '\0');
+		buff->i = 0;
+		if ((buff->length = read(buff->fd, buff->data, buff->buff_len)) <= 0)
+			return ((buff->fd = -1), '\0');
 	}
 	return (buff->data[buff->i]);
 }
