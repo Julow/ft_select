@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 20:50:42 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 00:19:15 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:21:04 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ static char		*get_color(const char *arg)
 	if (!(stat.st_mode & S_IRUSR))
 		return (COLOR_DENIED);
 	if (ft_strend(arg, ".o") || ft_strend(arg, ".a") || ft_strend(arg, ".zip")
-		|| ft_strend(arg, ".tar") || ft_strend(arg, ".gz"))
+		|| ft_match((char*)arg, ".tar*") || ft_strend(arg, ".gz"))
 		return (COLOR_ARCHIVE);
-	if (ft_strend(arg, ".c") || ft_strend(arg, ".h") || ft_strend(arg, ".s"))
+	if (ft_strend(arg, ".c") || ft_strend(arg, ".h") || ft_strend(arg, ".s")
+		|| ft_strstr(arg, "Makefile"))
 		return (COLOR_CODE);
 	return (NULL);
 }

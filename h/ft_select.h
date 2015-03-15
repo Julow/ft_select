@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 00:32:12 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:05:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,11 @@ t_bool			list_search(t_env *env, char c);
 ** menu
 */
 void			open_menu(t_env *env);
+
+void			menu_select(t_env *env);
+void			menu_delete(t_env *env);
+
+int				ft_menu(char **menu);
 
 /*
 ** utils
