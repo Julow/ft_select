@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:05:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:34:19 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ typedef struct	s_choice
 # define CELL_MIN		8
 # define CELL_MARGIN	2
 
-# define FLAG(e,f)		(((e)->flags) & (f))
-# define FLAG_1			(1 << 1)
-# define FLAG_C			(1 << 2)
+# define FLAG_1			1
+# define FLAG_C			2
 
 # define COLOR_DIR		C_BLUE
 # define COLOR_PIPE		C_YELLOW

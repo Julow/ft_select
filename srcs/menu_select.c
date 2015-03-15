@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/15 16:04:59 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:25:02 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:36:36 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void		select_by_color(t_env *env, const char *color, t_bool select)
 {
 	int				i;
 
-	if (FLAG(env, FLAG_1))
+	if (FLAG(env->flags, FLAG_1))
 		return ;
 	i = -1;
 	while (++i < env->list.length)
 	{
-		if (ft_strequ(TG(t_choice, &(env->list), i)->color, color))
-			TG(t_choice, &(env->list), i)->selected = select;
+		if (ft_strequ(TG(t_choice, env->list, i)->color, color))
+			TG(t_choice, env->list, i)->selected = select;
 	}
 }
 

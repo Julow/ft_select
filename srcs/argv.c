@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 20:50:42 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:21:04 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:34:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int		parse_options(t_env *env, int argc, char **argv)
 		j = 0;
 		while (argv[i][++j] != '\0')
 			if (argv[i][j] == '1')
-				flags |= FLAG_1;
+				flags |= BIT(FLAG_1);
 			else if (argv[i][j] == 'c')
-				flags |= FLAG_C;
+				flags |= BIT(FLAG_C);
 			else
 				return ((ft_strequ(argv[i], "--")) ? i + 1 : i);
 		env->flags |= flags;

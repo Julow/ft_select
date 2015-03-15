@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:44:13 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 00:19:38 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:35:21 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void		print_choice(t_env *env, int i)
 {
 	t_choice		*choice;
 
-	choice = TG(t_choice, &(env->list), i);
+	choice = TG(t_choice, env->list, i);
 	PCN(' ', CELL_MARGIN), PS((i == env->pos) ? "> " : "  ");
 	if (choice->selected)
 		TPS("mr");
 	if (i == env->pos)
 		TPS("us");
-	if (choice->color != NULL && FLAG(env, FLAG_C))
+	if (choice->color != NULL && FLAG(env->flags, FLAG_C))
 		PS(choice->color);
 	P(choice->data, choice->length);
 	if (i == env->pos)
@@ -32,7 +32,7 @@ static void		print_choice(t_env *env, int i)
 	PCN(' ', env->cell_width - choice->length);
 	if (choice->selected)
 		TPS("me");
-	if (choice->color != NULL && FLAG(env, FLAG_C))
+	if (choice->color != NULL && FLAG(env->flags, FLAG_C))
 		PS(C_RESET);
 	PCN(' ', CELL_MARGIN), PS((i == env->pos) ? " <" : "  ");
 }

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 20:50:51 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:37:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		print_selected(t_env *env)
 	i = -1;
 	while (++i < env->list.length)
 	{
-		tmp = TG(t_choice, &(env->list), i);
+		tmp = TG(t_choice, env->list, i);
 		if (tmp->selected)
 		{
 			if (printed)

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 22:22:20 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/15 16:37:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 void			list_setpos(t_env *env, int pos)
 {
-	if (FLAG(env, FLAG_1))
-		TG(t_choice, &(env->list), env->pos)->selected = false;
+	if (FLAG(env->flags, FLAG_1))
+		TG(t_choice, env->list, env->pos)->selected = false;
 	env->pos = pos;
 	while ((env->pos / env->lines) > (env->col_offset + env->columns - 3))
 		env->col_offset++;
 	while ((env->pos / env->lines) < env->col_offset)
 		env->col_offset--;
-	if (FLAG(env, FLAG_1))
-		TG(t_choice, &(env->list), env->pos)->selected = true;
+	if (FLAG(env->flags, FLAG_1))
+		TG(t_choice, env->list, env->pos)->selected = true;
 }
 
 void			list_move(t_env *env, int key)
@@ -47,9 +47,9 @@ void			list_select(t_env *env)
 {
 	t_choice		*tmp;
 
-	if (FLAG(env, FLAG_1))
+	if (FLAG(env->flags, FLAG_1))
 		return ;
-	tmp = TG(t_choice, &(env->list), env->pos);
+	tmp = TG(t_choice, env->list, env->pos);
 	tmp->selected = (tmp->selected) ? false : true;
 	list_move(env, KEY_DOWN);
 }
@@ -58,11 +58,11 @@ void			list_select_all(t_env *env, t_bool select)
 {
 	int				i;
 
-	if (FLAG(env, FLAG_1))
+	if (FLAG(env->flags, FLAG_1))
 		return ;
 	i = -1;
 	while (++i < env->list.length)
-		TG(t_choice, &(env->list), i)->selected = select;
+		TG(t_choice, env->list, i)->selected = select;
 }
 
 void			list_remove(t_env *env, t_bool back)
