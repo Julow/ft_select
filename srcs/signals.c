@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/14 20:28:28 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 13:45:26 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void		sig_handler(int sig)
 	{
 		term_update(&(ENV->term));
 		update_env(ENV);
-		print_list(ENV);
+		if (!(ENV->in_menu))
+			print_list(ENV);
 	}
 	else if (sig == SIGTSTP)
 	{

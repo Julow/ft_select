@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:08:31 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 17:03:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 13:44:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 **  ^E			deselect all
 **  RETURN		print the selection and quit
 **  ESC			quit (without printing the selection)
-**  END			open menu
+**  TAB			open menu
 **  All other	Search in the list
 ** -
 ** Options:
@@ -40,6 +40,7 @@ typedef struct	s_env
 	t_term			term;
 	int				flags;
 	t_tab			list;
+	t_bool			in_menu;
 	int				pos;
 	int				cell_width;
 	int				col_offset;

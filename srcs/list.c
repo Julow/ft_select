@@ -6,12 +6,23 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 01:30:25 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:37:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 14:46:46 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <stdlib.h>
+
+void			list_select(t_env *env)
+{
+	t_choice		*tmp;
+
+	if (FLAG(env->flags, FLAG_1))
+		return ;
+	tmp = TG(t_choice, env->list, env->pos);
+	tmp->selected = (tmp->selected) ? false : true;
+	list_move(env, KEY_DOWN);
+}
 
 void			list_setpos(t_env *env, int pos)
 {
@@ -41,17 +52,6 @@ void			list_move(t_env *env, int key)
 	else
 		dir = 0;
 	list_setpos(env, (env->pos + dir + env->list.length) % env->list.length);
-}
-
-void			list_select(t_env *env)
-{
-	t_choice		*tmp;
-
-	if (FLAG(env->flags, FLAG_1))
-		return ;
-	tmp = TG(t_choice, env->list, env->pos);
-	tmp->selected = (tmp->selected) ? false : true;
-	list_move(env, KEY_DOWN);
 }
 
 void			list_select_all(t_env *env, t_bool select)

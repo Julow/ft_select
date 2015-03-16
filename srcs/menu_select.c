@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/15 16:04:59 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 17:06:55 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 14:48:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ static void		select_by_color(t_env *env, const char *color, t_bool select)
 		if (ft_strequ(TG(t_choice, env->list, i)->color, color))
 			TG(t_choice, env->list, i)->selected = select;
 	}
+}
+
+static void		select_special(t_env *env, t_bool select)
+{
+	select_by_color(env, COLOR_PIPE, select);
+	select_by_color(env, COLOR_BLOCK, select);
+	select_by_color(env, COLOR_LINK, select);
+	select_by_color(env, COLOR_SOCKET, select);
+	select_by_color(env, COLOR_EXEC, select);
+	select_by_color(env, COLOR_DENIED, select);
 }
 
 void			menu_select(t_env *env)
@@ -46,14 +56,7 @@ void			menu_select(t_env *env)
 	else if (select == 6 || select == 7)
 		select_by_color(env, COLOR_CODE, (select == 6));
 	else if (select == 8 || select == 9)
-	{
-		select_by_color(env, COLOR_PIPE, (select == 8));
-		select_by_color(env, COLOR_BLOCK, (select == 8));
-		select_by_color(env, COLOR_LINK, (select == 8));
-		select_by_color(env, COLOR_SOCKET, (select == 8));
-		select_by_color(env, COLOR_EXEC, (select == 8));
-		select_by_color(env, COLOR_DENIED, (select == 8));
-	}
+		select_special(env, (select == 8));
 	else if (select == 10 || select == 11)
 		select_by_color(env, NULL, (select == 10));
 }

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/14 23:51:16 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 16:39:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 13:44:30 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void			open_menu(t_env *env)
 	menu[3] = (FLAG(env->flags, FLAG_1)) ? "Disable 1-Mode" : "Enable 1-Mode";
 	menu[4] = "Back";
 	menu[5] = NULL;
+	env->in_menu = true;
 	select = ft_menu(menu);
 	if (select == 0)
 		menu_select(env);
@@ -36,5 +37,6 @@ void			open_menu(t_env *env)
 		env->flags ^= BIT(FLAG_1);
 		list_setpos(env, env->pos);
 	}
+	env->in_menu = false;
 	print_list(env);
 }

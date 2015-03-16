@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 23:43:18 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/15 00:01:37 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/16 13:43:40 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_bool	handle_key(t_env *env, int key)
 		list_select_all(env, true);
 	else if (key == KEY_CTRL_E)
 		list_select_all(env, false);
-	else if (key == KEY_END)
+	else if (key == KEY_ASCII('\t'))
 		open_menu(env);
 	else
 		return (false);
