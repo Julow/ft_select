@@ -6,13 +6,14 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 13:23:11 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/16 13:45:26 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/18 19:49:27 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <signal.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <termcap.h>
 #include <sys/ioctl.h>
 
@@ -38,6 +39,8 @@ static void		sig_handler(int sig)
 	}
 	else if (sig == SIGTSTP)
 	{
+		if (!isatty(1))
+			return ;
 		term_restore(&(ENV->term));
 		signal(SIGTSTP, SIG_DFL);
 		ioctl(0, TIOCSTI, "\032");
