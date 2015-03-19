@@ -6,12 +6,13 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/19 18:25:14 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/19 18:51:37 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 #define ERROR_NO_TERM		ERROR "ft_select need a terminal"
 
@@ -39,8 +40,6 @@ static void		print_selected(t_env *env)
 		NL;
 }
 
-#include <fcntl.h>
-
 static t_bool	init_fd(void)
 {
 	int				fd;
@@ -49,7 +48,7 @@ static t_bool	init_fd(void)
 	if (fd == -1)
 		return (OUT(2), PS(ERROR_NO_TERM), NL, false);
 	OUT(fd);
-	return (false);
+	return (true);
 }
 
 int				main(int argc, char **argv)
