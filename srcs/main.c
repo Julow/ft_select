@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 19:07:03 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/03/16 14:32:40 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/03/19 18:25:14 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,17 @@ static void		print_selected(t_env *env)
 		NL;
 }
 
+#include <fcntl.h>
+
 static t_bool	init_fd(void)
 {
-	if (isatty(2))
-		OUT(2);
-	else if (isatty(1))
-		OUT(1);
-	else
-	{
-		OUT(2);
-		PS(ERROR_NO_TERM);
-		NL;
-		return (false);
-	}
-	return (true);
+	int				fd;
+
+	fd = open(ttyname(0), O_WRONLY);
+	if (fd == -1)
+		return (OUT(2), PS(ERROR_NO_TERM), NL, false);
+	OUT(fd);
+	return (false);
 }
 
 int				main(int argc, char **argv)
